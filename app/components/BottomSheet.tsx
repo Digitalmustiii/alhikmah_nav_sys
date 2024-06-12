@@ -1,4 +1,4 @@
-import { useClient } from "react"; // Import the useClient hook from react
+import { useState } from "react";
 
 const BottomSheet = () => {
   const [showBottomSheet, setShowBottomSheet] = useState(true);
@@ -18,7 +18,7 @@ const BottomSheet = () => {
       return e.buttons === 1;
     }
 
-    let button = e.which || e.button;
+    let button: number = e.which || e.button; // Define button as number
     return button === 1;
   };
 
@@ -30,14 +30,15 @@ const BottomSheet = () => {
   const dragStart = (e: any) => {
     if (!detectLeftMouse(e)) return;
 
-    let startY = e.clientY;
-    let newHeight;
+    let startY: number = e.clientY; // Define startY as number
+    let newHeight: number;
 
     const dragMove = (e: any) => {
-      const delta = startY - e.clientY;
+      const delta: number = startY - e.clientY; // Define delta as number
       newHeight = bottomSheetHeight + (delta / window.innerHeight) * 100;
       setBottomSheetHeight(newHeight);
     };
+
     document.onpointermove = dragMove;
 
     const dragEnd = () => {
@@ -52,6 +53,7 @@ const BottomSheet = () => {
         setBottomSheetHeight(100);
       }
     };
+
     document.onpointerup = dragEnd;
   };
 
